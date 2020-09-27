@@ -1,13 +1,13 @@
 package com.example.cryptos.network
 
 
-import okhttp3.ResponseBody
+import com.example.cryptos.network.model.ResponseTickers
 import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiServices {
 
     @GET("ticker")
-    fun getTickers(): Call<ResponseBody>
+    fun getTickers(): Call<ResponseTickers>
 
 }

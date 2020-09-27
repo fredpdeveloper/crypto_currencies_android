@@ -1,7 +1,7 @@
 package com.example.cryptos.network
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 
@@ -23,11 +23,11 @@ class RestClient private constructor() {
     init {
         val okHttpClient = OkHttpClient().newBuilder().connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
-            .build();
+            .build()
         val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
         mApiServices = retrofit.create(ApiServices::class.java)
     }
 

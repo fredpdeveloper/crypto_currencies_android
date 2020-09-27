@@ -11,7 +11,7 @@ import com.example.cryptos.database.TickerRoomDatabase
 import com.example.cryptos.interfaces.NetworkResponseCallback
 import com.example.cryptos.repository.TickerDatabaseRepository
 import com.example.cryptos.utils.NetworkHelper
-import com.fpuente.mvvm_kotlin.repository.TickerNetworkRepository
+import com.example.cryptos.repository.TickerNetworkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception

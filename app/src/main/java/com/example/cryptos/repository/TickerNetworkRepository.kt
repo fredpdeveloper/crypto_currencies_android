@@ -1,13 +1,10 @@
-package com.fpuente.mvvm_kotlin.repository
+package com.example.cryptos.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.interfaces.NetworkResponseCallback
 import com.example.cryptos.network.RestClient
-import com.google.gson.GsonBuilder
-import okhttp3.ResponseBody
-import org.json.JSONObject
+import com.example.cryptos.network.model.ResponseTickers
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +13,7 @@ import java.lang.Exception
 
 class TickerNetworkRepository private constructor() {
     private lateinit var mCallback: NetworkResponseCallback
-    private var mTickerList: MutableLiveData<List<Ticker>> =
+    private var mTickerList =
         MutableLiveData<List<Ticker>>().apply { value = emptyList() }
 
     companion object {
@@ -31,8 +28,7 @@ class TickerNetworkRepository private constructor() {
         }
     }
 
-
-    private lateinit var mTickerCall: Call<ResponseBody>
+    private lateinit var mTickerCall: Call<ResponseTickers>
 
     fun getTickers(callback: NetworkResponseCallback, forceFetch : Boolean): MutableLiveData<List<Ticker>> {
         try{
@@ -42,26 +38,15 @@ class TickerNetworkRepository private constructor() {
             return mTickerList
         }
         mTickerCall = RestClient.getInstance().getApiService().getTickers()
-
-        mTickerCall.enqueue(object : Callback<ResponseBody> {
-
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-
-                val  responseBody = response.body()?.string()
-                val jsonObject = JSONObject(responseBody)
-                Log.e("JSON",jsonObject.toString())
-                val gson = GsonBuilder().create()
-                val tickers = gson.fromJson(jsonObject.getJSONArray("data").toString() , Array<Ticker>::class.java).toList()
-
-                mTickerList.value = tickers
+            mTickerCall.enqueue(object : Callback<ResponseTickers> {
+                override fun onResponse(call: Call<ResponseTickers>, response: Response<ResponseTickers>) {
+                val tickers = response.body()
+                    mTickerList.value = tickers?.data
                 mCallback.onNetworkSuccess()
             }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("respomnseas",t.toString())
-
+            override fun onFailure(call: Call<ResponseTickers>, t: Throwable) {
                 t.fillInStackTrace()
-
                 mTickerList.value = emptyList()
                 mCallback.onNetworkFailure(t)
             }
