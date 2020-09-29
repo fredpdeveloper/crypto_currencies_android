@@ -1,19 +1,20 @@
 package com.example.cryptos.network
+
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class RestClient private constructor() {
+class RestClientTickers private constructor() {
     companion object {
         private const val BASE_URL = "https://api.cryptomkt.com/v1/"
-        private lateinit var mApiServices: ApiServices
-        private var mInstance: RestClient? = null
-        fun getInstance(): RestClient {
+        private lateinit var mApiTickers: ApiTickers
+        private var mInstance: RestClientTickers? = null
+        fun getInstance(): RestClientTickers {
             if (mInstance == null) {
                 synchronized(this) {
-                    mInstance = RestClient()
+                    mInstance = RestClientTickers()
                 }
             }
             return mInstance!!
@@ -28,10 +29,10 @@ class RestClient private constructor() {
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        mApiServices = retrofit.create(ApiServices::class.java)
+        mApiTickers = retrofit.create(ApiTickers::class.java)
     }
 
-    fun getApiService() = mApiServices
+    fun getApiService() = mApiTickers
 
 
 }

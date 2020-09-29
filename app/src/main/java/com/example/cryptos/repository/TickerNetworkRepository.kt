@@ -3,7 +3,7 @@ package com.example.cryptos.repository
 import androidx.lifecycle.MutableLiveData
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.interfaces.NetworkResponseCallback
-import com.example.cryptos.network.RestClient
+import com.example.cryptos.network.RestClientTickers
 import com.example.cryptos.network.model.ResponseTickers
 
 import retrofit2.Call
@@ -37,7 +37,7 @@ class TickerNetworkRepository private constructor() {
             mCallback.onNetworkSuccess()
             return mTickerList
         }
-        mTickerCall = RestClient.getInstance().getApiService().getTickers()
+        mTickerCall = RestClientTickers.getInstance().getApiService().getTickers()
             mTickerCall.enqueue(object : Callback<ResponseTickers> {
                 override fun onResponse(call: Call<ResponseTickers>, response: Response<ResponseTickers>) {
                 val tickers = response.body()
