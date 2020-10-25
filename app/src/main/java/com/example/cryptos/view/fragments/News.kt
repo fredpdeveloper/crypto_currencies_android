@@ -1,23 +1,18 @@
 package com.example.cryptos.view.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptos.R
 import com.example.cryptos.adapter.NewsListAdapter
-import com.example.cryptos.adapter.TickerListAdapter
-import com.example.cryptos.interfaces.NewsRecyclerViewCallback
-import com.example.cryptos.interfaces.RecyclerViewCallback
-import com.example.cryptos.network.model.Article
 import com.example.cryptos.viewmodel.NewsViewModel
-import com.example.cryptos.viewmodel.TickersViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +24,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [News.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class News : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var newsViewModel: NewsViewModel
+    private lateinit var model: NewsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,14 +52,15 @@ class News : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity!!.applicationContext)
         // Get a new or existing ViewModel from the ViewModelProvider.
-        newsViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-        newsViewModel.allNews.observe(viewLifecycleOwner, Observer { news ->
-            // Update the cached copy of the tickers in the adapter.
-            news?.let {
-                adapter.setNews(it)
+        model = ViewModelProvider(this).get(NewsViewModel::class.java)
+        model.getNews()
+        model.status.observe(viewLifecycleOwner, Observer { NewsApiStatus ->
 
-            }
-        }) // Get a new or existing ViewModel from the ViewModelProvider.
+        })
+        model.newsResponse.observe(viewLifecycleOwner, Observer {
+            ResponseNews ->
+            ResponseNews.articles?.let { adapter.setNews(it) }
+        })
 
         return view
     }
