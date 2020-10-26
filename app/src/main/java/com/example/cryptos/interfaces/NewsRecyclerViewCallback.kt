@@ -1,6 +1,5 @@
 package com.example.cryptos.interfaces
 
-import com.example.cryptos.database.Ticker
 import com.example.cryptos.network.model.Article
 
 interface NewsRecyclerViewCallback {
