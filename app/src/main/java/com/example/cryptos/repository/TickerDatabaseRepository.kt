@@ -5,8 +5,9 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.database.TickerDao
+import javax.inject.Inject
 
-class TickerDatabaseRepository(private val tickerDao: TickerDao) {
+class TickerDatabaseRepository @Inject constructor(private val tickerDao: TickerDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.

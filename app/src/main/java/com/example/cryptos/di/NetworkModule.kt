@@ -1,5 +1,6 @@
 package com.example.cryptos.di
 
+import com.example.cryptos.network.CryptoService
 import com.example.cryptos.network.NewsService
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,12 @@ class NetworkModule {
     @Provides
     fun provideNewsService(): NewsService{
         return NewsService.create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCryptoService(): CryptoService{
+        return CryptoService.create()
     }
 
 }
