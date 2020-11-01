@@ -11,14 +11,12 @@ import com.example.cryptos.view.fragments.Tickers
 class ViewStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun createFragment(position: Int): Fragment {
-        // Hardcoded in this order, you'll want to use lists and make sure the titles match
         return if (position == 0) {
             Tickers()
         } else News()
     }
 
     override fun getItemCount(): Int {
-        // Hardcoded, use lists
         return 2
     }
 }
