@@ -1,6 +1,5 @@
 package com.example.cryptos.viewmodel
 
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.cryptos.network.model.NewsApiStatus
@@ -10,10 +9,8 @@ import com.example.cryptos.usecases.GetNewsUseCase
 import kotlinx.coroutines.launch
 
 class NewsViewModel @ViewModelInject internal constructor(
-    newsRepository: NewsRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val newsRepository: NewsRepository
 ) : ViewModel() {
-    private val newsRepository = newsRepository
 
     private val _status = MutableLiveData<NewsApiStatus>()
     val status: LiveData<NewsApiStatus>
@@ -37,6 +34,7 @@ class NewsViewModel @ViewModelInject internal constructor(
             }
         }
     }
+
     init {
 
     }

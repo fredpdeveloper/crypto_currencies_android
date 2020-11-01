@@ -14,6 +14,7 @@ import com.example.cryptos.R
 import com.example.cryptos.adapter.TickerListAdapter
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.interfaces.RecyclerViewCallback
+import com.example.cryptos.network.model.CryptoApiStatus.*
 import com.example.cryptos.view.TickerDialog
 import com.example.cryptos.viewmodel.CryptoViewModel
 import com.google.android.material.chip.Chip
@@ -22,31 +23,11 @@ import kotlinx.android.synthetic.main.fragment_ticker.*
 import kotlinx.android.synthetic.main.filter.*
 import kotlinx.android.synthetic.main.filter.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Tickers.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class Tickers : Fragment(), RecyclerViewCallback {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     private lateinit var model: CryptoViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,19 +49,19 @@ class Tickers : Fragment(), RecyclerViewCallback {
         model.status.observe(viewLifecycleOwner, Observer { CryptoApiStatus ->
 
             when (CryptoApiStatus) {
-                com.example.cryptos.network.model.CryptoApiStatus.DONE -> {
+                DONE -> {
                     recyclerView.visibility = View.VISIBLE
                     shimmerFrameLayout.visibility = View.GONE
                     shimmerFrameLayout.stopShimmerAnimation()
                 }
-                com.example.cryptos.network.model.CryptoApiStatus.LOADING -> {
+                LOADING -> {
 
                     recyclerView.visibility = View.GONE
                     shimmerFrameLayout.visibility = View.VISIBLE
                     shimmerFrameLayout.startShimmerAnimation()
 
                 }
-                com.example.cryptos.network.model.CryptoApiStatus.ERROR -> {
+                ERROR -> {
                     recyclerView.visibility = View.VISIBLE
                     shimmerFrameLayout.visibility = View.GONE
                     shimmerFrameLayout.stopShimmerAnimation()
@@ -144,34 +125,15 @@ class Tickers : Fragment(), RecyclerViewCallback {
 
     override fun onRecycleViewItemClick(ticker: Ticker, position: Int) {
         model.getTickersByMarker(ticker.market).observe(this, Observer { tickers ->
-             // Update the cached copy of the tickers in the adapter.
-             tickers?.let {
-                 val tickerDialog: TickerDialog = TickerDialog(tickers, ticker).newInstance()
-                 tickerDialog.show(
-                     activity?.supportFragmentManager!!,
-                     "ticker_dialog"
-                 )
-             }
-         })
+            // Update the cached copy of the tickers in the adapter.
+            tickers?.let {
+                val tickerDialog: TickerDialog = TickerDialog(tickers, ticker).newInstance()
+                tickerDialog.show(
+                    activity?.supportFragmentManager!!,
+                    "ticker_dialog"
+                )
+            }
+        })
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Tickers.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Tickers().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

@@ -23,18 +23,10 @@ class MainActivity : AppCompatActivity(){
         val pa: ViewPager2 = findViewById(R.id.pager)
         pa.adapter = sa
 
-        // Up to here, we have working scrollable pages
-
-
-        // Up to here, we have working scrollable pages
         val tabLayout: TabLayout = findViewById(R.id.tabLayout)
-        tabLayout.addTab(tabLayout.newTab().setText("Precio Actual"))
-        tabLayout.addTab(tabLayout.newTab().setText("Noticias"))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_price_title)))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_new_title)))
 
-        // Now we have tabs, NOTE: I am hardcoding the order, you'll want to do something smarter
-
-
-        // Now we have tabs, NOTE: I am hardcoding the order, you'll want to do something smarter
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 pa.currentItem = tab.position

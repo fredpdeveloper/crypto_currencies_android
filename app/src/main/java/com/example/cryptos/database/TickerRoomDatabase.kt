@@ -30,8 +30,6 @@ abstract class TickerRoomDatabase : RoomDatabase() {
                         TickerRoomDatabase::class.java,
                         "tickers_database"
                     )
-                        // Wipes and rebuilds instead of migrating if no Migration object.
-                        // Migration is not part of this codelab.
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance

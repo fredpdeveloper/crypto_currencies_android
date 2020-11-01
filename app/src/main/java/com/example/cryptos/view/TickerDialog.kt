@@ -157,7 +157,6 @@ class TickerDialog(tickers: List<Ticker>, lastTicker: Ticker) : BottomSheetDialo
         val values: ArrayList<Entry> = ArrayList()
         var count = 0
         tickers.forEach {
-            Log.e("asdasdas", "" + count + ":" + it.bid)
             values.add(Entry(count.toFloat(), it.bid.toFloat()))
             count++
         }
@@ -171,9 +170,6 @@ class TickerDialog(tickers: List<Ticker>, lastTicker: Ticker) : BottomSheetDialo
             mChart!!.notifyDataSetChanged()
         } else {
             set1 = LineDataSet(values, "Precio")
-            /*set1.setDrawIcons(false)
-            set1.enableDashedLine(10f, 5f, 0f)
-            set1.enableDashedHighlightLine(10f, 5f, 0f)*/
             set1.color = Color.DKGRAY
             set1.setCircleColor(Color.DKGRAY)
             set1.lineWidth = 1f
