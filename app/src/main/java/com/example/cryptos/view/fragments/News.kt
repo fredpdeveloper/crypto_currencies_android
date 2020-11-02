@@ -29,7 +29,7 @@ class News : Fragment() {
         val view = inflater.inflate(R.layout.fragment_news, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NewsListAdapter(activity!!.applicationContext)
+        val adapter = NewsListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity!!.applicationContext)
         model = ViewModelProvider(this).get(NewsViewModel::class.java)
