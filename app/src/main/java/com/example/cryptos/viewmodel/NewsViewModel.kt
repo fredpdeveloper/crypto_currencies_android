@@ -36,7 +36,7 @@ class NewsViewModel @ViewModelInject internal constructor(
     }
 
     init {
-
+          getNews()
     }
 
 
