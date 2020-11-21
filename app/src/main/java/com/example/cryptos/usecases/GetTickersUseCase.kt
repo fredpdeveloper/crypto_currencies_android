@@ -1,12 +1,12 @@
 package com.example.cryptos.usecases
 
 import com.example.cryptos.api.model.ResponseTickers
-import com.example.cryptos.repository.CryptoRepository
+import com.example.cryptos.repository.TickerRepository
 
 class GetTickersUseCase(
-    private val cryptoRepository: CryptoRepository
+    private val tickerRepository: TickerRepository
 ) {
     suspend fun invoke(): ResponseTickers {
-        return cryptoRepository.getTickers()
+        return tickerRepository.getTickers()
     }
 }

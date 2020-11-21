@@ -4,15 +4,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.api.model.CryptoApiStatus
-import com.example.cryptos.api.model.ResponseTickers
-import com.example.cryptos.repository.CryptoRepository
+import com.example.cryptos.repository.TickerRepository
 import com.example.cryptos.repository.TickerDatabaseRepository
+import com.example.cryptos.usecases.GetTickersDatabaseUseCase
 import com.example.cryptos.usecases.GetTickersUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CryptoViewModel @ViewModelInject internal constructor(
-    private val cryptoRepository: CryptoRepository,
+class TickersViewModel @ViewModelInject internal constructor(
+    private val tickerRepository: TickerRepository,
     private val databaseRepository: TickerDatabaseRepository
 ) : ViewModel() {
 
@@ -20,24 +20,29 @@ class CryptoViewModel @ViewModelInject internal constructor(
     val status: LiveData<CryptoApiStatus>
         get() = _status
 
-    private val _tickersResponse = MutableLiveData<ResponseTickers>()
-    val tickersResponse: LiveData<ResponseTickers>
+    private val _tickersResponse = MutableLiveData<List<Ticker>>()
+    val tickersResponse: LiveData<List<Ticker>>
         get() = _tickersResponse
 
-    fun getTickers( market: String? = null) {
+    private val _tickersDatabase = MutableLiveData<List<Ticker>>()
+    val tickersDatabase: LiveData<List<Ticker>>
+        get() = _tickersDatabase
+
+    fun getTickers(market: String? = null) {
         viewModelScope.launch {
             try {
+
                 _status.value = CryptoApiStatus.LOADING
-                _tickersResponse.value = GetTickersUseCase(cryptoRepository).invoke()
-                //_tickersResponse.value!!.data = _tickersResponse.value!!.data.filter { it.market.contains("CLP") }
-                _tickersResponse.value!!.data = _tickersResponse.value!!.data.filter { it.bid.toDouble() > 0 }
-                if(market != null){
-                    _tickersResponse.value!!.data = _tickersResponse.value!!.data.filter { it.market.contains(market) }
+                var response = GetTickersUseCase(tickerRepository).invoke().data.filter { it.bid.toDouble() > 0 }
+                if (market != null) {
+                    _tickersResponse.value =
+                        response.filter { it.market.contains(market) }
 
+                }else{
+                    _tickersResponse.value = response
                 }
-                 insert(tickersResponse.value!!.data)
+                insert(response)
                 _status.value = CryptoApiStatus.DONE
-
 
 
             } catch (e: Exception) {
@@ -54,12 +59,13 @@ class CryptoViewModel @ViewModelInject internal constructor(
         databaseRepository.insert(tickers)
     }
 
-    fun getTickersByMarker(marker: String): LiveData<List<Ticker>> {
-        return databaseRepository.getTickersByMarker(marker)
+    fun getTickersByMarker(marker: String) {
+        viewModelScope.launch {
+            _tickersDatabase.value = GetTickersDatabaseUseCase(databaseRepository).invoke(marker)
+        }
     }
 
     init {
-        getTickers()
     }
 
 

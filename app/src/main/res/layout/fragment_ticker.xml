@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.cryptos.viewmodel.CryptoViewModel" />
+            type="com.example.cryptos.viewmodel.TickersViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,12 +27,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            android:visibility="@{viewModel.status == viewModel.status.LOADING ? View.VISIBLE: View.GONE}"
             android:id="@+id/shimmerFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:orientation="vertical"
+            android:visibility="@{viewModel.status == viewModel.status.LOADING ? View.VISIBLE: View.GONE}"
             app:layout_constraintTop_toBottomOf="@+id/include">
 
             <LinearLayout
@@ -63,7 +63,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include"
-            app:tickersListData="@{viewModel.tickersResponse.data}"
+            app:tickersListData="@{viewModel.tickersResponse}"
             tools:listitem="@layout/ticker_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

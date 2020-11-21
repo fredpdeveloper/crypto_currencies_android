@@ -2,4 +2,10 @@
     <string name="app_name">cryptos</string>
     <string name="tab_new_title">Noticias</string>
     <string name="tab_price_title">Precio Actual</string>
+    <string name="eth">ETH</string>
+    <string name="eos">EOS</string>
+    <string name="xlm">XLM</string>
+    <string name="btc">BTC</string>
+    <string name="shimmer_title_news">Varios proyectos afectados por el hackeo de USD 200 millones a KuCoin han sido congelados, pausados o reiniciados</string>
+    <string name="shimmer_new_by">por Juanito perez</string>
 </resources>

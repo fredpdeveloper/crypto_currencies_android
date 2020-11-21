@@ -16,12 +16,6 @@ import com.example.cryptos.api.model.Article
 object BindingAdapterUtils {
 
     @JvmStatic
-    @BindingAdapter("cursorPosition")
-    fun setCursorPosition(editText: EditText, text: String) {
-        editText.setSelection(text.length)
-    }
-
-    @JvmStatic
     @BindingAdapter("newsListData")
     fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
         val adapter = recyclerView.adapter as NewsListAdapter

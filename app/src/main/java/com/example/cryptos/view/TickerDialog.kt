@@ -9,8 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.cryptos.R
 import com.example.cryptos.database.Ticker
+import com.example.cryptos.view.fragments.Tickers
+import com.example.cryptos.viewmodel.TickersViewModel
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.Entry
@@ -18,13 +22,20 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
 
-
-class TickerDialog(tickers: List<Ticker>, lastTicker: Ticker) : BottomSheetDialogFragment() {
-    private var tickers = tickers
-    private var lastTicker = lastTicker
+@AndroidEntryPoint
+class TickerDialog(private var lastTicker: Ticker) : BottomSheetDialogFragment() {
     private var mChart: LineChart? = null
+    private lateinit var model: TickersViewModel
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.getTickersByMarker(lastTicker.market)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,9 +60,6 @@ class TickerDialog(tickers: List<Ticker>, lastTicker: Ticker) : BottomSheetDialo
         mv.chartView = mChart
         mChart!!.marker = mv
 
-        tickers.forEach {
-
-        }
         when {
             lastTicker.market.contains("ETH") -> {
                 tickerImg.setImageResource(R.drawable.ethereum)
@@ -90,34 +98,48 @@ class TickerDialog(tickers: List<Ticker>, lastTicker: Ticker) : BottomSheetDialo
             }
         }
 
-        var sum = 0.0
-        tickers.forEach {
-            sum += it.bid.toDouble()
-        }
-        var average = sum / tickers.size
-        var percent = ((lastTicker.bid.toDouble() * 100) / average) - 100
-        val df = DecimalFormat()
-        df.maximumFractionDigits = 2
-        tickerPercent.text = "%${df.format(percent)} ${lastTicker.market}"
+        model = ViewModelProvider(this)[TickersViewModel::class.java]
 
-        if (percent < 0) {
-            tickerPercent.setTextColor(resources.getColor(R.color.colorRed))
-        } else if (percent > 0){
-            tickerPercent.setTextColor(resources.getColor(R.color.colorGreen))
-        } else {
-            tickerPercent.setTextColor(resources.getColor(R.color.colorBlack))
-        }
-        renderData()
+
+        model.tickersDatabase.observe(viewLifecycleOwner, Observer { tickers ->
+
+            Log.e("cambioo","siiii");
+            Log.e("cambio",tickers.toString())
+            var sum = 0.0
+            tickers?.forEach {
+                sum += it.bid.toDouble()
+            }
+            val average = sum / tickers!!.size
+            val percent = ((lastTicker.bid.toDouble() * 100) / average) - 100
+            val df = DecimalFormat()
+            df.maximumFractionDigits = 2
+            tickerPercent.text = "%${df.format(percent)} ${lastTicker.market}"
+
+            when {
+                percent < 0 -> {
+                    tickerPercent.setTextColor(resources.getColor(R.color.colorRed))
+                }
+                percent > 0 -> {
+                    tickerPercent.setTextColor(resources.getColor(R.color.colorGreen))
+                }
+                else -> {
+                    tickerPercent.setTextColor(resources.getColor(R.color.colorBlack))
+                }
+            }
+            renderData(tickers)
+        })
+
+
 
         return view
     }
 
 
     fun newInstance(): TickerDialog {
-        return TickerDialog(this.tickers,this.lastTicker)
+        return TickerDialog(this.lastTicker)
     }
 
-    fun renderData() {
+    fun renderData(tickers: List<Ticker>) {
         val llXAxis = LimitLine(10f, "Index 10")
         llXAxis.lineWidth = 4f
         llXAxis.enableDashedLine(10f, 10f, 0f)
@@ -148,12 +170,12 @@ class TickerDialog(tickers: List<Ticker>, lastTicker: Ticker) : BottomSheetDialo
         leftAxis.setDrawZeroLine(false)
         leftAxis.setDrawLimitLinesBehindData(false)
         mChart!!.axisRight.isEnabled = false
-        setData()
+        setData(tickers)
 
 
     }
 
-    private fun setData() {
+    private fun setData(tickers: List<Ticker>) {
         val values: ArrayList<Entry> = ArrayList()
         var count = 0
         tickers.forEach {
