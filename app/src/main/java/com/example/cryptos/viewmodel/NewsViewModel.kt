@@ -2,8 +2,8 @@ package com.example.cryptos.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.cryptos.network.model.NewsApiStatus
-import com.example.cryptos.network.model.ResponseNews
+import com.example.cryptos.api.model.NewsApiStatus
+import com.example.cryptos.api.model.ResponseNews
 import com.example.cryptos.repository.NewsRepository
 import com.example.cryptos.usecases.GetNewsUseCase
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ class NewsViewModel @ViewModelInject internal constructor(
     val newsResponse: LiveData<ResponseNews>
         get() = _newsResponse
 
-    fun getNews() {
+    private fun getNews() {
         viewModelScope.launch {
             try {
                 _status.value = NewsApiStatus.LOADING

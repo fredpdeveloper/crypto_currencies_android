@@ -1,7 +1,7 @@
 package com.example.cryptos.di
 
-import com.example.cryptos.network.CryptoService
-import com.example.cryptos.network.NewsService
+import com.example.cryptos.api.CryptoService
+import com.example.cryptos.api.NewsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

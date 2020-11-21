@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptos.databinding.NewsItemBinding
-import com.example.cryptos.network.model.Article
+import com.example.cryptos.api.model.Article
 
 
 class NewsListAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<Article, NewsListAdapter.ProductViewHolder>(
+    ListAdapter<Article, NewsListAdapter.NewsViewHolder>(
         DiffCallback
     ) {
-    class ProductViewHolder(private val binding: NewsItemBinding) :
+    class NewsViewHolder(private val binding: NewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Article) {
             binding.item = item
@@ -32,11 +32,11 @@ class NewsListAdapter(private val onClickListener: OnClickListener) :
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(NewsItemBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+        return NewsViewHolder(NewsItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val product = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(product)

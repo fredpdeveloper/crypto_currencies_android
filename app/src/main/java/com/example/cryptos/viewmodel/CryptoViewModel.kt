@@ -3,8 +3,8 @@ package com.example.cryptos.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.cryptos.database.Ticker
-import com.example.cryptos.network.model.CryptoApiStatus
-import com.example.cryptos.network.model.ResponseTickers
+import com.example.cryptos.api.model.CryptoApiStatus
+import com.example.cryptos.api.model.ResponseTickers
 import com.example.cryptos.repository.CryptoRepository
 import com.example.cryptos.repository.TickerDatabaseRepository
 import com.example.cryptos.usecases.GetTickersUseCase
@@ -21,15 +21,23 @@ class CryptoViewModel @ViewModelInject internal constructor(
         get() = _status
 
     private val _tickersResponse = MutableLiveData<ResponseTickers>()
-    val newsResponse: LiveData<ResponseTickers>
+    val tickersResponse: LiveData<ResponseTickers>
         get() = _tickersResponse
 
-    fun getTickers() {
+    fun getTickers( market: String? = null) {
         viewModelScope.launch {
             try {
                 _status.value = CryptoApiStatus.LOADING
                 _tickersResponse.value = GetTickersUseCase(cryptoRepository).invoke()
+                //_tickersResponse.value!!.data = _tickersResponse.value!!.data.filter { it.market.contains("CLP") }
+                _tickersResponse.value!!.data = _tickersResponse.value!!.data.filter { it.bid.toDouble() > 0 }
+                if(market != null){
+                    _tickersResponse.value!!.data = _tickersResponse.value!!.data.filter { it.market.contains(market) }
+
+                }
+                 insert(tickersResponse.value!!.data)
                 _status.value = CryptoApiStatus.DONE
+
 
 
             } catch (e: Exception) {
@@ -51,7 +59,7 @@ class CryptoViewModel @ViewModelInject internal constructor(
     }
 
     init {
-
+        getTickers()
     }
 
 

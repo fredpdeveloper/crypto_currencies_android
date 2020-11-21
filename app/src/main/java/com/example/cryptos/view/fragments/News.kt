@@ -11,6 +11,7 @@ import com.example.cryptos.adapter.NewsListAdapter
 import com.example.cryptos.databinding.FragmentNewsBinding
 import com.example.cryptos.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_news.*
 
 
 @AndroidEntryPoint
@@ -36,6 +37,19 @@ class News : Fragment() {
             }
         )
         return binding.root
+    }
+
+    /**
+     * TODO remove shimmer
+     */
+    override fun onResume() {
+        super.onResume()
+        shimmerFrameLayout!!.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        shimmerFrameLayout!!.stopShimmerAnimation()
+        super.onPause()
     }
 
 }
