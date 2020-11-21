@@ -1,78 +1,50 @@
 package com.example.cryptos.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.cryptos.R
-import com.example.cryptos.database.Ticker
-import com.example.cryptos.interfaces.NewsRecyclerViewCallback
-import com.example.cryptos.interfaces.RecyclerViewCallback
-import com.example.cryptos.network.model.Article
+import com.example.cryptos.databinding.NewsItemBinding
+import com.example.cryptos.api.model.Article
 
 
-class NewsListAdapter internal constructor(
-    context: Context
-) : RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
+class NewsListAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<Article, NewsListAdapter.NewsViewHolder>(
+        DiffCallback
+    ) {
+    class NewsViewHolder(private val binding: NewsItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Article) {
+            binding.item = item
+            binding.executePendingBindings()
+        }
+    }
 
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var news = emptyList<Article>()
-    private val context = context
-    var recyclerViewCallback: NewsRecyclerViewCallback? = null
+    companion object DiffCallback : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem === newItem
+        }
 
-    inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val newsTitleItemView: TextView = itemView.findViewById(R.id.news_title)
-        val newsImgItemView: ImageView = itemView.findViewById(R.id.news_img)
-        val newsByView: TextView = itemView.findViewById(R.id.news_by)
+        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem.title == newItem.title
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val itemView = inflater.inflate(R.layout.news_item, parent, false)
-        return NewsViewHolder(itemView)
+        return NewsViewHolder(NewsItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        val current = news[position]
+        val product = getItem(position)
         holder.itemView.setOnClickListener {
-            this.recyclerViewCallback?.onRecycleViewItemClick(current, position)
+            onClickListener.onClick(product)
         }
-        holder.newsTitleItemView.text = current.title
-        holder.newsByView.text = "por "+current.author
-        Glide
-            .with(context)
-            .load(current.urlToImage)
-            .placeholder(R.color.colorAccent)
-            .into(holder.newsImgItemView);
-
-
-
+        holder.bind(product)
     }
 
-    private fun intoString(
-        textReal: String,
-        pos: Int
-    ): String? {
-        val stringBuilder = StringBuilder(textReal)
-        stringBuilder.insert(pos, "/")
-        return "Precio $stringBuilder"
+    class OnClickListener(val clickListener: (item: Article) -> Unit) {
+        fun onClick(item: Article) = clickListener(item)
     }
-
-    internal fun setNews(news: List<Article>) {
-        this.news = news
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount() = news.size
-
-    fun setOnCallbackListener(recyclerViewCallback: NewsRecyclerViewCallback) {
-        this.recyclerViewCallback = recyclerViewCallback
-    }
-
 }
-
-
-

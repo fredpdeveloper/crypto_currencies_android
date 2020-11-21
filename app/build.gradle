@@ -29,9 +29,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
+
+}
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -70,10 +76,7 @@ dependencies {
 
     //shimmer facebook loading
     implementation "com.facebook.shimmer:shimmer:$rootProject.shimmer"
-
-    //load image
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    
 
     // HILT
     implementation "com.google.dagger:hilt-android:2.28-alpha"
@@ -84,6 +87,9 @@ dependencies {
     //lOGGING-INTERCEPTOR
     // Logging-Interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLogging_version"
+
+    //coil
+    implementation("io.coil-kt:coil:1.0.0")
 
 
 }

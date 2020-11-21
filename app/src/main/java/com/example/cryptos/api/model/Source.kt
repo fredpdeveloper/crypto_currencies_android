@@ -1,4 +1,4 @@
-package com.example.cryptos.network.model
+package com.example.cryptos.api.model
 
 data class Source(
     val id :  String?,
