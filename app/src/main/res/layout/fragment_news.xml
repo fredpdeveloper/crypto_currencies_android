@@ -18,12 +18,12 @@
         tools:context=".view.MainActivity">
 
         <com.facebook.shimmer.ShimmerFrameLayout
+            app:newsApiStatus="@{viewModel.status}"
             android:id="@+id/shimmerFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.status == viewModel.status.LOADING ? View.VISIBLE: View.GONE}"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout

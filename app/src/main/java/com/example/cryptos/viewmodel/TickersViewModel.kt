@@ -8,6 +8,7 @@ import com.example.cryptos.repository.TickerRepository
 import com.example.cryptos.repository.TickerDatabaseRepository
 import com.example.cryptos.usecases.GetTickersDatabaseUseCase
 import com.example.cryptos.usecases.GetTickersUseCase
+import com.example.cryptos.usecases.InsertTickersDatabaseUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -61,11 +62,11 @@ class TickersViewModel @ViewModelInject internal constructor(
         }
     }
 
-    /**
-     * Launching a new coroutine to insert the data in a non-blocking way
-     */
-    fun insert(tickers: List<Ticker>) = viewModelScope.launch(Dispatchers.IO) {
-        databaseRepository.insert(tickers)
+    private fun insert(tickers: List<Ticker>) {
+        viewModelScope.launch {
+            InsertTickersDatabaseUseCase(databaseRepository).invoke(tickers)
+        }
+
     }
 
     fun getTickersByMarker(ticker: Ticker) {

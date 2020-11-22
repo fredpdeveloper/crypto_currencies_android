@@ -1,12 +1,9 @@
 package com.example.cryptos.utils
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -15,14 +12,10 @@ import com.example.cryptos.adapter.NewsListAdapter
 import com.example.cryptos.adapter.TickerListAdapter
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.api.model.Article
-import com.example.cryptos.view.TooltipView
-import com.example.cryptos.view.fragments.Tickers
+import com.example.cryptos.api.model.CryptoApiStatus
+import com.example.cryptos.api.model.NewsApiStatus
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.LimitLine
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.text.DecimalFormat
 
 object BindingAdapterUtils {
@@ -130,6 +123,51 @@ object BindingAdapterUtils {
 
     }
 
+    @JvmStatic
+    @BindingAdapter("cryptoApiStatus")
+    fun setCryptoApiStatus(view: ShimmerFrameLayout, enum: Enum<CryptoApiStatus>) {
+
+        when (enum) {
+            CryptoApiStatus.DONE -> {
+                view.visibility = View.GONE
+                view.stopShimmerAnimation()
+            }
+            CryptoApiStatus.ERROR -> {
+                view.visibility = View.GONE
+                view.stopShimmerAnimation()
+
+            }
+            CryptoApiStatus.LOADING -> {
+                view.visibility = View.VISIBLE
+                view.startShimmerAnimation()
+
+            }
+        }
+
+    }
+
+    @JvmStatic
+    @BindingAdapter("newsApiStatus")
+    fun setNewsApiStatus(view: ShimmerFrameLayout, enum: Enum<NewsApiStatus>) {
+
+        when (enum) {
+            CryptoApiStatus.DONE -> {
+                view.visibility = View.GONE
+                view.stopShimmerAnimation()
+            }
+            CryptoApiStatus.ERROR -> {
+                view.visibility = View.GONE
+                view.stopShimmerAnimation()
+
+            }
+            CryptoApiStatus.LOADING -> {
+                view.visibility = View.VISIBLE
+                view.startShimmerAnimation()
+
+            }
+        }
+
+    }
 
 
 }

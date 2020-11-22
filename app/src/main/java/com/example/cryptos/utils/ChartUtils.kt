@@ -1,29 +1,17 @@
 package com.example.cryptos.utils
 
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.cryptos.R
-import com.example.cryptos.adapter.NewsListAdapter
-import com.example.cryptos.adapter.TickerListAdapter
 import com.example.cryptos.database.Ticker
-import com.example.cryptos.api.model.Article
 import com.example.cryptos.view.TooltipView
-import com.example.cryptos.view.fragments.Tickers
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import java.text.DecimalFormat
+
 
 object ChartUtils {
 
@@ -36,7 +24,7 @@ object ChartUtils {
             R.layout.tooltip_view
         )
         mv.chartView = mChart
-        mChart!!.marker = mv
+        mChart.marker = mv
 
         val llXAxis = LimitLine(10f, "Index 10")
         llXAxis.lineWidth = 4f

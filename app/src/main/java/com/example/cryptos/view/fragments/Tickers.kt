@@ -67,18 +67,4 @@ class Tickers : Fragment() {
 
     }
 
-    /**
-     * TODO remove shimmer
-     */
-    override fun onResume() {
-        super.onResume()
-        shimmerFrameLayout!!.startShimmerAnimation()
-    }
-
-    override fun onPause() {
-        shimmerFrameLayout!!.stopShimmerAnimation()
-        super.onPause()
-    }
-
-
 }
