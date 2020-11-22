@@ -1,9 +1,12 @@
 package com.example.cryptos.utils
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -12,6 +15,15 @@ import com.example.cryptos.adapter.NewsListAdapter
 import com.example.cryptos.adapter.TickerListAdapter
 import com.example.cryptos.database.Ticker
 import com.example.cryptos.api.model.Article
+import com.example.cryptos.view.TooltipView
+import com.example.cryptos.view.fragments.Tickers
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.LimitLine
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import java.text.DecimalFormat
 
 object BindingAdapterUtils {
 
@@ -28,7 +40,6 @@ object BindingAdapterUtils {
         val adapter = recyclerView.adapter as TickerListAdapter
         adapter.submitList(data)
     }
-
 
     @JvmStatic
     @BindingAdapter("countrySrc")
@@ -75,7 +86,6 @@ object BindingAdapterUtils {
         }
     }
 
-
     @JvmStatic
     @BindingAdapter(value = ["imageUrl", "error"])
     fun setImageUrl(view: ImageView, url: String, error: Drawable) {
@@ -93,5 +103,33 @@ object BindingAdapterUtils {
             view.visibility = View.GONE
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("tickerPercent", "tickerMarket")
+    fun setTickerPercent(view: TextView, percent: Double, market: String) {
+        val df = DecimalFormat()
+        df.maximumFractionDigits = 2
+        view.text = "%${df.format(percent)} $market"
+        when {
+            percent < 0 -> {
+                view.setTextColor(view.context.getColor(R.color.colorRed))
+            }
+            percent > 0 -> {
+                view.setTextColor(view.context.getColor(R.color.colorGreen))
+            }
+            else -> {
+                view.setTextColor(view.context.getColor(R.color.colorBlack))
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setLineChartData")
+    fun setLineChartData(view: LineChart, tickers: List<Ticker>?) {
+        tickers?.let { ChartUtils.renderData(view, it) }
+
+    }
+
+
 
 }

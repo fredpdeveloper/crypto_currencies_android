@@ -28,17 +28,26 @@ class TickersViewModel @ViewModelInject internal constructor(
     val tickersDatabase: LiveData<List<Ticker>>
         get() = _tickersDatabase
 
+    private val _tickerSelect = MutableLiveData<Ticker>()
+    val tickerSelect: LiveData<Ticker>
+        get() = _tickerSelect
+
+    private val _tickerPercent = MutableLiveData<Double>()
+    val tickerPercent: LiveData<Double>
+        get() = _tickerPercent
+
     fun getTickers(market: String? = null) {
         viewModelScope.launch {
             try {
 
                 _status.value = CryptoApiStatus.LOADING
-                var response = GetTickersUseCase(tickerRepository).invoke().data.filter { it.bid.toDouble() > 0 }
+                var response =
+                    GetTickersUseCase(tickerRepository).invoke().data.filter { it.bid.toDouble() > 0 }
                 if (market != null) {
                     _tickersResponse.value =
                         response.filter { it.market.contains(market) }
 
-                }else{
+                } else {
                     _tickersResponse.value = response
                 }
                 insert(response)
@@ -59,11 +68,27 @@ class TickersViewModel @ViewModelInject internal constructor(
         databaseRepository.insert(tickers)
     }
 
-    fun getTickersByMarker(marker: String) {
+    fun getTickersByMarker(ticker: Ticker) {
         viewModelScope.launch {
-            _tickersDatabase.value = GetTickersDatabaseUseCase(databaseRepository).invoke(marker)
+            _tickerSelect.value = ticker
+            _tickersDatabase.value =
+                GetTickersDatabaseUseCase(databaseRepository).invoke(ticker.market)
+            calculatePercent(_tickersDatabase.value!!, _tickerSelect.value!!)
+
         }
     }
+
+    private fun calculatePercent(tickers: List<Ticker>, ticker: Ticker) {
+        var sum = 0.0
+        tickers.forEach {
+            sum += it.bid.toDouble()
+        }
+        val average = sum / tickers.size
+        val percent = ((ticker.bid.toDouble() * 100) / average) - 100
+        _tickerPercent.value = percent
+
+    }
+
 
     init {
     }
