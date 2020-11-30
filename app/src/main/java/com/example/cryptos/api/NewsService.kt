@@ -1,5 +1,6 @@
 package com.example.cryptos.api
 
+import com.example.cryptos.BuildConfig
 import com.example.cryptos.api.model.ResponseNews
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,7 +18,7 @@ interface NewsService {
     suspend fun getNews(): ResponseNews
 
     companion object {
-        private const val BASE_URL = "https://newsapi.org/v2/"
+        private const val BASE_URL = BuildConfig.API_NEW
 
         fun create(): NewsService {
 

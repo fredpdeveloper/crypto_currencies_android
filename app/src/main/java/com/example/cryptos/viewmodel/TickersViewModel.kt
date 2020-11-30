@@ -42,16 +42,8 @@ class TickersViewModel @ViewModelInject internal constructor(
             try {
 
                 _status.value = CryptoApiStatus.LOADING
-                val response =
-                    GetTickersUseCase(tickerRepository).invoke().data.filter { it.bid.toDouble() > 0 }
-                if (market != null) {
-                    _tickersResponse.value =
-                        response.filter { it.market.contains(market) }
-
-                } else {
-                    _tickersResponse.value = response
-                }
-                insert(response)
+                _tickersResponse.value = GetTickersUseCase(tickerRepository).invoke(market)
+                insert(_tickersResponse.value!!)
                 _status.value = CryptoApiStatus.DONE
 
 

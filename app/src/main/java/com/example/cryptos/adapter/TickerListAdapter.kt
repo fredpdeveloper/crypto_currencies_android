@@ -42,7 +42,6 @@ class TickerListAdapter(private val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: TickerViewHolder, position: Int) {
         val product = getItem(position)
         holder.itemView.setOnClickListener {
-            Log.e("asdasd","click")
             onClickListener.onClick(product)
         }
         holder.bind(product)
