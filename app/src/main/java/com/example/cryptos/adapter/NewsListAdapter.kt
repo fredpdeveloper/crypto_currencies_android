@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptos.databinding.NewsItemBinding
 import com.example.cryptos.api.model.Article
+import com.example.cryptos.databinding.TickerItemBinding
 
 
 class NewsListAdapter(private val onClickListener: OnClickListener) :
@@ -33,7 +34,9 @@ class NewsListAdapter(private val onClickListener: OnClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        return NewsViewHolder(NewsItemBinding.inflate(LayoutInflater.from(parent.context)))
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = NewsItemBinding.inflate(inflater,parent,false)
+        return NewsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {

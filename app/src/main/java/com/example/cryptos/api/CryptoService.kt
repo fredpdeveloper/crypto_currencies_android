@@ -1,5 +1,6 @@
 package com.example.cryptos.api
 
+import com.example.cryptos.BuildConfig
 import com.example.cryptos.api.model.ResponseTickers
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,7 +18,7 @@ interface CryptoService {
     suspend fun getTickers(): ResponseTickers
 
     companion object {
-        private const val BASE_URL = "https://api.cryptomkt.com/v1/"
+        private const val BASE_URL = BuildConfig.API_CRYPTO
 
         fun create(): CryptoService {
 

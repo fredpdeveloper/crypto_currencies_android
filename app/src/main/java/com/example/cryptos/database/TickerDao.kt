@@ -14,7 +14,7 @@ interface TickerDao {
 
 
     @Query("SELECT  * from tickers_table WHERE market = :marker GROUP BY bid ORDER BY timestamp ASC")
-    fun getTickerByMarker(marker: String): LiveData<List<Ticker>>
+    fun getTickerByMarker(marker: String): List<Ticker>
 
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

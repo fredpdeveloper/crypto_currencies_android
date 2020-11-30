@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cryptos.adapter.TickerListAdapter
 import com.example.cryptos.databinding.FragmentTickerBinding
 import com.example.cryptos.view.TickerDialog
-import com.example.cryptos.viewmodel.CryptoViewModel
+import com.example.cryptos.viewmodel.TickersViewModel
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -21,13 +21,14 @@ import kotlinx.android.synthetic.main.fragment_news.*
 @AndroidEntryPoint
 class Tickers : Fragment() {
 
-    private lateinit var model: CryptoViewModel
+    private lateinit var model: TickersViewModel
     private lateinit var binding: FragmentTickerBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model = ViewModelProvider(this)[CryptoViewModel::class.java]
+        model = ViewModelProvider(this)[TickersViewModel::class.java]
         binding.viewModel = model
+        model.getTickers()
     }
 
     override fun onCreateView(
@@ -38,18 +39,12 @@ class Tickers : Fragment() {
         binding.lifecycleOwner = this
         binding.recyclerview.adapter = TickerListAdapter(
             TickerListAdapter.OnClickListener { ticker ->
-                model.getTickersByMarker(ticker.market)
-                    .observe(viewLifecycleOwner, Observer { tickers ->
-                        // Update the cached copy of the tickers in the adapter.
-                        tickers?.let {
-                            val tickerDialog: TickerDialog =
-                                TickerDialog(tickers, ticker).newInstance()
-                            tickerDialog.show(
-                                activity?.supportFragmentManager!!,
-                                "ticker_dialog"
-                            )
-                        }
-                    })
+                val tickerDialog: TickerDialog =
+                    TickerDialog(ticker).newInstance()
+                tickerDialog.show(
+                    activity?.supportFragmentManager!!,
+                    "ticker_dialog"
+                )
             }
         )
 
@@ -71,19 +66,5 @@ class Tickers : Fragment() {
         return binding.root
 
     }
-
-    /**
-     * TODO remove shimmer
-     */
-    override fun onResume() {
-        super.onResume()
-        shimmerFrameLayout!!.startShimmerAnimation()
-    }
-
-    override fun onPause() {
-        shimmerFrameLayout!!.stopShimmerAnimation()
-        super.onPause()
-    }
-
 
 }

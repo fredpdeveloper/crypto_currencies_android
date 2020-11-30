@@ -2,8 +2,6 @@ package com.example.cryptos.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.cryptos.R
-import okhttp3.internal.format
 
 class UtilsHelper {
     companion object {

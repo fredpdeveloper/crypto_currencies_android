@@ -14,8 +14,7 @@ class TickerDatabaseRepository @Inject constructor(private val tickerDao: Ticker
         tickerDao.insertAll(tickers)
     }
 
-    fun getTickersByMarker(market: String): LiveData<List<Ticker>> {
-
+    suspend fun getTickersByMarker(market: String): List<Ticker> {
         return tickerDao.getTickerByMarker(market)
     }
 
