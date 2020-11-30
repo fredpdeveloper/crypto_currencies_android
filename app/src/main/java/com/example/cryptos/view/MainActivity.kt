@@ -7,23 +7,27 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.cryptos.R
 import com.example.cryptos.adapter.ViewStateAdapter
+import com.example.cryptos.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val fm: FragmentManager = supportFragmentManager
-
         val sa = ViewStateAdapter(fm, lifecycle)
-        val pa: ViewPager2 = findViewById(R.id.pager)
+
+        val pa: ViewPager2 = binding.pager
         pa.adapter = sa
 
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout)
+
+        val tabLayout: TabLayout = binding.tabLayout
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_price_title)))
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_new_title)))
 
