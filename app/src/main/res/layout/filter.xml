@@ -1,113 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ticker_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.chip.ChipGroup
-        android:layout_marginLeft="16dp"
-        android:id="@+id/chips_group_country"
-        app:singleSelection="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ticker_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:id="@+id/chip6"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips_group_exchange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CLP"
-            app:chipIcon="@drawable/chile"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false"/>
+            app:layout_constraintEnd_toEndOf="parent"
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:id="@+id/chip5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ARS"
-            app:chipIcon="@drawable/argentina"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleSelection="true">
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:id="@+id/chip4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EUR"
-            app:chipIcon="@drawable/europa"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false"/>
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btc"
+                app:chipIcon="@drawable/bitcoin"
+                app:chipIconEnabled="true"
+                app:closeIconEnabled="false" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:id="@+id/chip3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BRL"
-            app:chipIcon="@drawable/brasil"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false"/>
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eth"
+                app:chipIcon="@drawable/ethereum"
+                app:chipIconEnabled="true"
+                app:closeIconEnabled="false" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:id="@+id/chip2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MXN"
-            app:closeIconEnabled="false"
-            />
-    </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eos"
+                app:chipIcon="@drawable/eos"
+                app:chipIconEnabled="true"
+                app:closeIconEnabled="false" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chips_group_exchange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/chips_group_country"
-        app:layout_constraintStart_toStartOf="@+id/chips_group_country"
-        app:layout_constraintTop_toBottomOf="@+id/chips_group_country"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BTC"
-            app:chipIcon="@drawable/bitcoin"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ETH"
-            app:chipIcon="@drawable/ethereum"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EOS"
-            app:chipIcon="@drawable/eos"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="XLM"
-            app:chipIcon="@drawable/stellar"
-            app:chipIconEnabled="true"
-            app:closeIconEnabled="false" />
-    </com.google.android.material.chip.ChipGroup>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/xlm"
+                app:chipIcon="@drawable/stellar"
+                app:chipIconEnabled="true"
+                app:closeIconEnabled="false" />
+        </com.google.android.material.chip.ChipGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
