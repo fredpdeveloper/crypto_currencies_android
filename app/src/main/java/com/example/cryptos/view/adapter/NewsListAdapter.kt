@@ -1,4 +1,4 @@
-package com.example.cryptos.adapter
+package com.example.cryptos.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

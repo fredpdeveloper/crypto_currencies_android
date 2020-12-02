@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MainActivity">
+        tools:context=".view.activity.MainActivity">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             app:newsApiStatus="@{viewModel.status}"

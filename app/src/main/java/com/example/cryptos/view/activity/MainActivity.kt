@@ -1,4 +1,4 @@
-package com.example.cryptos.view
+package com.example.cryptos.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.cryptos.R
-import com.example.cryptos.adapter.ViewStateAdapter
+import com.example.cryptos.view.adapter.ViewStateAdapter
 import com.example.cryptos.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener

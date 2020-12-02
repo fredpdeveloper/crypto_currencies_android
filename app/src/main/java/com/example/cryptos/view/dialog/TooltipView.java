@@ -1,4 +1,4 @@
-package com.example.cryptos.view;
+package com.example.cryptos.view.dialog;
 
 import android.content.Context;
 import android.widget.TextView;

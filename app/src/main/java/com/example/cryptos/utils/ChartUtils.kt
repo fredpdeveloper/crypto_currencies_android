@@ -4,7 +4,7 @@ import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.example.cryptos.R
 import com.example.cryptos.data.database.Ticker
-import com.example.cryptos.view.TooltipView
+import com.example.cryptos.view.dialog.TooltipView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.Entry
