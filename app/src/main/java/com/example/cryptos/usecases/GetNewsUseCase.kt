@@ -1,6 +1,6 @@
 package com.example.cryptos.usecases
 
-import com.example.cryptos.api.model.ResponseNews
+import com.example.cryptos.data.api.model.ResponseNews
 import com.example.cryptos.repository.NewsRepository
 
 class GetNewsUseCase(

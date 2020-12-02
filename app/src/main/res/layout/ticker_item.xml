@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.example.cryptos.database.Ticker" />
+            type="com.example.cryptos.data.database.Ticker" />
     </data>
 
     <androidx.cardview.widget.CardView

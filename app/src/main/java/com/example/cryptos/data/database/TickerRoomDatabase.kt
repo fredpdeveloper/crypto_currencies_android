@@ -1,4 +1,4 @@
-package com.example.cryptos.database
+package com.example.cryptos.data.database
 
 import android.content.Context
 import androidx.room.Database

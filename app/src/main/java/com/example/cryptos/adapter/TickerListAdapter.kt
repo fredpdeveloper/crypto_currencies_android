@@ -1,12 +1,11 @@
 package com.example.cryptos.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptos.database.Ticker
+import com.example.cryptos.data.database.Ticker
 import com.example.cryptos.databinding.TickerItemBinding
 
 

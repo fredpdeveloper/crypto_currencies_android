@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptos.database.Ticker
+import com.example.cryptos.data.database.Ticker
 import com.example.cryptos.databinding.TickerDialogBinding
 import com.example.cryptos.viewmodel.TickersViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
