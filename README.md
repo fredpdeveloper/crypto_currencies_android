@@ -31,4 +31,10 @@ Arquitectura
 -----------------------
 ![](https://github.com/fredpdeveloper/crypto_currencies_android/blob/master/image/arquitectura.png)
 
+Apis
+-----------------------
+
+- https://newsapi.org/
+- https://developers.cryptomkt.com/es/#introduccion
+
 
