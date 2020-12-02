@@ -26,3 +26,9 @@ Conceptos claves
 - Shimmer es una biblioteca de Android que proporciona una manera fácil de agregar un efecto de brillo a cualquier vista en su aplicación de Android
 - Logging-interceptor permite registrar HEADERS o BODY
 - Ticker son todos los activos financieros disponen de un codigo unico Ejemplo: BTC 
+
+Arquitectura
+-----------------------
+![](https://github.com/fredpdeveloper/crypto_currencies_android/blob/master/image/arquitectura.png)
+
+
