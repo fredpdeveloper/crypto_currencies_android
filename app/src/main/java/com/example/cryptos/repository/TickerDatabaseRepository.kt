@@ -2,8 +2,8 @@ package com.example.cryptos.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.example.cryptos.database.Ticker
-import com.example.cryptos.database.TickerDao
+import com.example.cryptos.data.database.Ticker
+import com.example.cryptos.data.database.TickerDao
 import javax.inject.Inject
 
 class TickerDatabaseRepository @Inject constructor(private val tickerDao: TickerDao) {

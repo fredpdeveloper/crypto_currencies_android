@@ -2,14 +2,13 @@ package com.example.cryptos.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.cryptos.database.Ticker
-import com.example.cryptos.api.model.CryptoApiStatus
+import com.example.cryptos.data.database.Ticker
+import com.example.cryptos.data.api.model.TickerApiStatus
 import com.example.cryptos.repository.TickerRepository
 import com.example.cryptos.repository.TickerDatabaseRepository
 import com.example.cryptos.usecases.GetTickersDatabaseUseCase
 import com.example.cryptos.usecases.GetTickersUseCase
 import com.example.cryptos.usecases.InsertTickersDatabaseUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TickersViewModel @ViewModelInject internal constructor(
@@ -17,8 +16,8 @@ class TickersViewModel @ViewModelInject internal constructor(
     private val databaseRepository: TickerDatabaseRepository
 ) : ViewModel() {
 
-    private val _status = MutableLiveData<CryptoApiStatus>()
-    val status: LiveData<CryptoApiStatus>
+    private val _status = MutableLiveData<TickerApiStatus>()
+    val status: LiveData<TickerApiStatus>
         get() = _status
 
     private val _tickersResponse = MutableLiveData<List<Ticker>>()
@@ -41,14 +40,14 @@ class TickersViewModel @ViewModelInject internal constructor(
         viewModelScope.launch {
             try {
 
-                _status.value = CryptoApiStatus.LOADING
+                _status.value = TickerApiStatus.LOADING
                 _tickersResponse.value = GetTickersUseCase(tickerRepository).invoke(market)
                 insert(_tickersResponse.value!!)
-                _status.value = CryptoApiStatus.DONE
+                _status.value = TickerApiStatus.DONE
 
 
             } catch (e: Exception) {
-                _status.value = CryptoApiStatus.ERROR
+                _status.value = TickerApiStatus.ERROR
                 e.printStackTrace()
             }
         }

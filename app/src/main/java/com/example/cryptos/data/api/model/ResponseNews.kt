@@ -1,4 +1,4 @@
-package com.example.cryptos.api.model
+package com.example.cryptos.data.api.model
 
 
 data class ResponseNews(

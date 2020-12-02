@@ -1,6 +1,6 @@
-package com.example.cryptos.api.model
+package com.example.cryptos.data.api.model
 
-import com.example.cryptos.database.Ticker
+import com.example.cryptos.data.database.Ticker
 
 data class ResponseTickers(
     val status: String,

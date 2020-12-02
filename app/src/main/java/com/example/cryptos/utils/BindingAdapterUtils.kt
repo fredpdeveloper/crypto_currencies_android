@@ -10,10 +10,10 @@ import coil.load
 import com.example.cryptos.R
 import com.example.cryptos.adapter.NewsListAdapter
 import com.example.cryptos.adapter.TickerListAdapter
-import com.example.cryptos.database.Ticker
-import com.example.cryptos.api.model.Article
-import com.example.cryptos.api.model.CryptoApiStatus
-import com.example.cryptos.api.model.NewsApiStatus
+import com.example.cryptos.data.database.Ticker
+import com.example.cryptos.data.api.model.Article
+import com.example.cryptos.data.api.model.TickerApiStatus
+import com.example.cryptos.data.api.model.NewsApiStatus
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.github.mikephil.charting.charts.LineChart
 import java.text.DecimalFormat
@@ -88,16 +88,6 @@ object BindingAdapterUtils {
     }
 
     @JvmStatic
-    @BindingAdapter("isVisible")
-    fun setIsVisible(view: View, isVisible: Boolean) {
-        if (isVisible) {
-            view.visibility = View.VISIBLE
-        } else {
-            view.visibility = View.GONE
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("tickerPercent", "tickerMarket")
     fun setTickerPercent(view: TextView, percent: Double, market: String) {
         val df = DecimalFormat()
@@ -124,20 +114,20 @@ object BindingAdapterUtils {
     }
 
     @JvmStatic
-    @BindingAdapter("cryptoApiStatus")
-    fun setCryptoApiStatus(view: ShimmerFrameLayout, enum: Enum<CryptoApiStatus>) {
+    @BindingAdapter("tickerApiStatus")
+    fun setTickerApiStatus(view: ShimmerFrameLayout, enum: Enum<TickerApiStatus>) {
 
         when (enum) {
-            CryptoApiStatus.DONE -> {
+            TickerApiStatus.DONE -> {
                 view.visibility = View.GONE
                 view.stopShimmerAnimation()
             }
-            CryptoApiStatus.ERROR -> {
+            TickerApiStatus.ERROR -> {
                 view.visibility = View.GONE
                 view.stopShimmerAnimation()
 
             }
-            CryptoApiStatus.LOADING -> {
+            TickerApiStatus.LOADING -> {
                 view.visibility = View.VISIBLE
                 view.startShimmerAnimation()
 
@@ -151,16 +141,16 @@ object BindingAdapterUtils {
     fun setNewsApiStatus(view: ShimmerFrameLayout, enum: Enum<NewsApiStatus>) {
 
         when (enum) {
-            CryptoApiStatus.DONE -> {
+            TickerApiStatus.DONE -> {
                 view.visibility = View.GONE
                 view.stopShimmerAnimation()
             }
-            CryptoApiStatus.ERROR -> {
+            TickerApiStatus.ERROR -> {
                 view.visibility = View.GONE
                 view.stopShimmerAnimation()
 
             }
-            CryptoApiStatus.LOADING -> {
+            TickerApiStatus.LOADING -> {
                 view.visibility = View.VISIBLE
                 view.startShimmerAnimation()
 

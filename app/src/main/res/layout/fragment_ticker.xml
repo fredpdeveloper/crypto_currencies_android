@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            app:cryptoApiStatus="@{viewModel.status}"
+            app:tickerApiStatus="@{viewModel.status}"
             android:id="@+id/shimmerFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"

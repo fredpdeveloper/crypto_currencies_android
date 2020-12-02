@@ -1,7 +1,7 @@
 package com.example.cryptos.di
 
-import com.example.cryptos.api.CryptoService
-import com.example.cryptos.api.NewsService
+import com.example.cryptos.data.api.TickerService
+import com.example.cryptos.data.api.NewsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +20,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideCryptoService(): CryptoService{
-        return CryptoService.create()
+    fun provideTickerService(): TickerService{
+        return TickerService.create()
     }
 
 }

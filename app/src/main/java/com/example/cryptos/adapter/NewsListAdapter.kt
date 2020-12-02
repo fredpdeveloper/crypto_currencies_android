@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptos.databinding.NewsItemBinding
-import com.example.cryptos.api.model.Article
-import com.example.cryptos.databinding.TickerItemBinding
+import com.example.cryptos.data.api.model.Article
 
 
 class NewsListAdapter(private val onClickListener: OnClickListener) :

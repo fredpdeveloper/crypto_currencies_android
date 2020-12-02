@@ -1,8 +1,8 @@
 package com.example.cryptos.di
 
 import android.content.Context
-import com.example.cryptos.database.TickerDao
-import com.example.cryptos.database.TickerRoomDatabase
+import com.example.cryptos.data.database.TickerDao
+import com.example.cryptos.data.database.TickerRoomDatabase
 import com.example.cryptos.repository.TickerDatabaseRepository
 import dagger.Module
 import dagger.Provides
