@@ -8,8 +8,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.cryptos.R
-import com.example.cryptos.adapter.NewsListAdapter
-import com.example.cryptos.adapter.TickerListAdapter
+import com.example.cryptos.view.adapter.NewsListAdapter
+import com.example.cryptos.view.adapter.TickerListAdapter
 import com.example.cryptos.data.database.Ticker
 import com.example.cryptos.data.api.model.Article
 import com.example.cryptos.data.api.model.TickerApiStatus

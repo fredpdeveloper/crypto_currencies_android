@@ -1,4 +1,4 @@
-package com.example.cryptos.adapter
+package com.example.cryptos.view.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

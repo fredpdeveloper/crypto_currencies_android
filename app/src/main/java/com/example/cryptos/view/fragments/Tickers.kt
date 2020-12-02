@@ -1,21 +1,18 @@
 package com.example.cryptos.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEach
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptos.adapter.TickerListAdapter
+import com.example.cryptos.view.adapter.TickerListAdapter
 import com.example.cryptos.databinding.FragmentTickerBinding
-import com.example.cryptos.view.TickerDialog
+import com.example.cryptos.view.dialog.TickerDialog
 import com.example.cryptos.viewmodel.TickersViewModel
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_news.*
 
 
 @AndroidEntryPoint
