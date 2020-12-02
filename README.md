@@ -25,3 +25,4 @@ Conceptos claves
 - MPAndroidChart, que nos permite mostrar de forma fácil y personalizable grandes conjuntos de datos en forma de gráficas. De esta forma el usuario disfruta de una mejor experiencia de uso
 - Shimmer es una biblioteca de Android que proporciona una manera fácil de agregar un efecto de brillo a cualquier vista en su aplicación de Android
 - Logging-interceptor permite registrar HEADERS o BODY
+- Ticker son todos los activos financieros disponen de un codigo unico Ejemplo: BTC 
