@@ -22,3 +22,4 @@ Conceptos claves
 - Room es una librería de base de datos que simplifica la tarea de trabajar con bases de datos en Android.
 - Hilt es una biblioteca de inyección de dependencias para Android que permite reducir el trabajo repetitivo de inyectar dependencias de forma manual en tu proyecto.
 - Coil Una biblioteca de carga de imágenes para Android respaldada por Kotlin Coroutines
+- MPAndroidChart, que nos permite mostrar de forma fácil y personalizable grandes conjuntos de datos en forma de gráficas. De esta forma el usuario disfruta de una mejor experiencia de uso
