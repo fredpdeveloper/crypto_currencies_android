@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.example.cryptos.api.model.Article" />
+            type="com.example.cryptos.data.api.model.Article" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -56,7 +56,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@{item.author}"
+                android:text="@{item.formattedAuthor}"
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"

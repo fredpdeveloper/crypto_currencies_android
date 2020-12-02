@@ -1,6 +1,6 @@
 package com.example.cryptos.usecases
 
-import com.example.cryptos.database.Ticker
+import com.example.cryptos.data.database.Ticker
 import com.example.cryptos.repository.TickerRepository
 
 class GetTickersUseCase(

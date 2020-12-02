@@ -1,4 +1,4 @@
-package com.example.cryptos.database
+package com.example.cryptos.data.database
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

@@ -2,8 +2,8 @@ package com.example.cryptos.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.cryptos.api.model.NewsApiStatus
-import com.example.cryptos.api.model.ResponseNews
+import com.example.cryptos.data.api.model.NewsApiStatus
+import com.example.cryptos.data.api.model.ResponseNews
 import com.example.cryptos.repository.NewsRepository
 import com.example.cryptos.usecases.GetNewsUseCase
 import kotlinx.coroutines.launch
