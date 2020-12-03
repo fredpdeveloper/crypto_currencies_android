@@ -32,4 +32,9 @@ Apis
 - https://newsapi.org/
 - https://developers.cryptomkt.com/es/#introduccion
 
+Referencias
+-----------------------
+
+https://developer.android.com/jetpack/guide?hl=es-419
+
 
