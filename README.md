@@ -32,8 +32,7 @@ Apis
 - https://newsapi.org/
 - https://developers.cryptomkt.com/es/#introduccion
 
-Referencias
------------------------
+
 [MVVM]: <https://developer.android.com/jetpack/guide?hl=es-419>
 [DATABINDING]: <https://developer.android.com/topic/libraries/data-binding?hl=es>
 [RETROFIT]: <https://square.github.io/retrofit/>
