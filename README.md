@@ -35,6 +35,13 @@ Apis
 Referencias
 -----------------------
 
-https://developer.android.com/jetpack/guide?hl=es-419
+- https://developer.android.com/jetpack/guide?hl=es-419
+- https://developer.android.com/topic/libraries/data-binding?hl=es
+- https://square.github.io/retrofit/
+- https://developer.android.com/training/data-storage/room
+- https://coil-kt.github.io/coil/
+- https://github.com/PhilJay/MPAndroidChart
+- https://github.com/facebook/shimmer-android
+- https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
 
 
